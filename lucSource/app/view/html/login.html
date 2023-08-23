@@ -1,0 +1,107 @@
+
+{include file="public/base" /}
+
+<style type="text/css">
+    @import url("{__CSS__}login.css");
+</style>
+
+
+    <div class="head_top">
+        <div class="com_content">
+             <div class="div_right">
+                  <div class="div">
+                       <div><i>&#xe783;</i><span>网站地图</span></div>
+                  </div>
+                  <div class="div">
+                       <div><i>&#xe76f;</i><span>联系我们</span></div>
+                  </div>
+             </div>
+        </div>
+    </div>
+
+    <div class="head_seach" style="background-color:#fff;position:relative;z-index:9;">
+        <div class="com_content">
+               <div class="com" style="padding:20px 0;">
+                 <div class="logo">
+                          <a href="/">
+                           <img src="{$logo_image}" style="height:60px;"/>
+                          </a>
+                     </div>
+               </div>
+        </div>
+    </div>
+
+<div class="body_login">
+<div class="panda">
+  <div class="ear"></div>
+  <div class="face">
+    <div class="eye-shade"></div>
+    <div class="eye-white">
+      <div class="eye-ball"></div>
+    </div>
+    <div class="eye-shade rgt"></div>
+    <div class="eye-white rgt">
+      <div class="eye-ball"></div>
+    </div>
+    <div class="nose"></div>
+    <div class="mouth"></div>
+  </div>
+  <div class="body"> </div>
+  <div class="foot">
+    <div class="finger"></div>
+  </div>
+  <div class="foot rgt">
+    <div class="finger"></div>
+  </div>
+</div>
+<form method="POST" action="/login/login">
+      <div class="hand"></div>
+      <div class="hand rgt"></div>
+      <h1>登录本站</h1>
+       <div><span style="font-size:14px;color:var(--g_cite)">{$msg}</span></div>
+      <div class="form-group">
+        <input required="required" id="username"  name="username" class="form-control"/>
+        <label class="form-label">用户名    </label>
+      </div>
+      <div class="form-group">
+        <input  type="password"  id="password"  name="password" required="required" class="form-control"/>
+        <label class="form-label">密码</label>
+        <p class="alert">Invalid Credentials..!!</p>
+        <button class="btn" type="submit">登录 </button>
+      </div>
+    </form>
+</div>
+
+
+
+
+<script>
+ $('#password').focusin(function(){
+  $('form').addClass('up')
+});
+$('#password').focusout(function(){
+  $('form').removeClass('up')
+});
+
+// Panda Eye move
+$(document).on( "mousemove", function( event ) {
+  var dw = $(document).width() / 15;
+  var dh = $(document).height() / 15;
+  var x = event.pageX/ dw;
+  var y = event.pageY/ dh;
+  $('.eye-ball').css({
+    width : x,
+    height : y
+  });
+});
+
+// validation
+
+
+$('.btn').click(function(){
+  $('form').addClass('wrong-entry');
+    setTimeout(function(){ 
+       $('form').removeClass('wrong-entry');
+     },3000 );
+});
+</script>

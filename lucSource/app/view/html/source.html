@@ -1,0 +1,80 @@
+
+{include file="public/base" /}
+{include file="public/head" /}
+
+<div class="news_list">
+    <div class="com_content">
+         <div class="com">
+
+                          <div class="news_list_top">
+                                <div class="t">
+                                      <div class="l">
+                                           <i>&#xe68f;</i>
+                                           <cite>分类</cite>
+                                      </div>
+                                      <div class="r">
+                                           <div  {eq name="cate_id" value=""}class='on'{/eq}>
+                                               <a href="/source"><span>全部</span></a>
+                                           </div>
+                                           {foreach $SourceCate as $key=>$vo} 
+                                                <div {eq name="vo.id.''" value="$cate_id.''"} class='on' {/eq} >
+                                                   <a href="/source?cate_id={$vo.id}"><span>{$vo.title}</span></a>
+                                                </div>
+                                            {/foreach} 
+                                      </div>
+                                </div>
+                                 <div class="t1">
+                                        {foreach $order_data as $key=>$vo} 
+                                           <div  class="div {$vo.class_name}" >
+                                                 <a href="/source?cate_id={$cate_id}&{$vo.name}={$vo.click_class}">
+                                                    <span>{$vo.value}</span>
+                                                </a>
+                                           </div>
+                                        {/foreach} 
+                                 </div>
+                          </div>
+                 
+                         <div class="news_list_content">
+                                <div class="am-g">
+                                    {foreach $source.data as $k=>$v }
+                                      <div class="am-u-sm-12 am-u-md-3 am-u-lg-3 {if $k == count($source.data) - 1 }am-u-end {/if}">
+                                          <div class="item">
+                                               <div>
+                                                     <a  href="/source/info?id={$v.id}">
+                                                              <div class="img">
+                                                                    <img src="{$v.thumb}"/>
+                                                                </div>
+                                                               <div class="info">
+                                                                   <p><span>{$v.title}</span></p>
+                                                                   <p><em>{$v.desc}</em></p>
+                                                               </div>
+                                               
+                                                              <div class="bottom">
+                                                                   <div class="div">
+                                                             
+                                                                        <div><i>&#xe612;</i><span>{$v.read}</span></div>
+                                                                   </div>
+                                                                   <div class="div">
+                                                                         <div><i>&#xe940;</i><em>{$v.created_at|date='Y-m-d'}</em></div>
+                                                                   </div>
+                                                              </div>
+                                                     </a>
+                                               </div>
+                                          </div>
+                                      </div>
+                                   {/foreach} 
+                                
+                                </div>
+                         </div>
+
+                 <div class="newpage" data-aos="fade-up" aos-easing="ease-in-quad" data-aos-delay="200" aos-duration="300">
+                      <?= $paginator;?>               
+		         </div>
+
+
+         </div>
+    </div>
+</div>
+
+
+{include file="public/footer" /}

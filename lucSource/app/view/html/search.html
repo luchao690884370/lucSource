@@ -1,0 +1,52 @@
+
+{include file="public/base" /}
+{include file="public/head" /}
+
+
+<div class="search_list">
+    <div class="com_content">
+         <div class="com">
+
+                
+             <div class="div_tabs">
+                 <div>
+                      <div {eq name="retrun_params.type" value="1"}class='on'{/eq}>
+                           <a href="/search?type=1&keywords={$retrun_params.keywords}">
+                                <span>网站项目</span><cite>[{$retrun_params.source_count}]</cite>
+                           </a>
+                      </div>
+
+                      <div {eq name="retrun_params.type" value="2" } class='on' {/eq} >
+                          <a href="/search?type=2&keywords={$retrun_params.keywords}">
+                               <span>文章资讯</span><cite>[{$retrun_params.article_count}]</cite>
+                          </a>
+                      </div>
+                 </div>
+             </div>
+             
+            {foreach $data['data'] as $key=>$vo} 
+                <div class="div_item">
+                    <div>
+                         <a href="{if $retrun_params.type == 1}/source/info?id={$vo.id}{else/}/news/info?id={$vo.id}{/if}">
+                                <div class="img">
+                                    <img src="{$vo.thumb}"/>
+                                </div>
+                                <div class="info">
+                                    <p><span>{$vo.title}</span></p>
+                                    <p><em>{$vo.content|substr=0,500}</em></p>
+                                </div>
+                         </a>
+                    </div>
+                </div>
+            {/foreach} 
+
+              <div class="newpage" data-aos="fade-up" aos-easing="ease-in-quad" data-aos-delay="200" aos-duration="300">
+                      <?= $paginator;?>               
+		         </div>
+
+         </div>
+    </div>
+</div>
+
+
+{include file="public/footer" /}

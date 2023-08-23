@@ -1,0 +1,178 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>新增页面</title>
+  <link rel="stylesheet" href="/app/admin/component/pear/css/pear.css" />
+  <link rel="stylesheet" href="/app/admin/admin/css/reset.css" />
+  <style>
+    .layui-iconpicker .layui-anim {
+      bottom: 42px !important;
+      top: inherit !important;
+    }
+  </style>
+</head>
+<body>
+
+<form class="layui-form" action="">
+
+  <div class="mainBox">
+    <div class="main-container mr-5">
+
+      <div class="layui-form-item">
+        <label class="layui-form-label required">标题</label>
+        <div class="layui-input-block">
+          <input type="text" name="title" required lay-verify="required" value="" class="layui-input">
+        </div>
+      </div>
+      <div class="layui-form-item">
+        <label class="layui-form-label required">图片</label>
+        <div class="layui-input-block">
+          <img class="img-3" src=""/>
+          <input type="text" style="display:none" name="img" value="" required lay-verify="required"/>
+          <button type="button" class="pear-btn pear-btn-primary pear-btn-sm" id="avatar" permission="app.admin.upload.avatar">
+            <i class="layui-icon layui-icon-upload"></i>上传图片
+          </button>
+          <button type="button" class="pear-btn pear-btn-primary pear-btn-sm" id="attachment-choose-avatar" permission="app.admin.upload.attachment">
+            <i class="layui-icon layui-icon-align-left"></i>选择图片
+          </button>
+        </div>
+      </div>
+      <div class="layui-form-item">
+        <label class="layui-form-label ">网址链接</label>
+        <div class="layui-input-block">
+          <input type="text" name="src" value="" class="layui-input">
+        </div>
+      </div>
+      <div class="layui-form-item">
+        <label class="layui-form-label">排序</label>
+        <div class="layui-input-block">
+          <input type="number" name="sort" value="0" class="layui-input">
+        </div>
+      </div>
+
+      <div class="layui-form-item">
+        <label class="layui-form-label">状态</label>
+        <div class="layui-input-block">
+          <input type="checkbox" id="status" lay-filter="status" lay-skin="switch" />
+          <input type="text" style="display:none" name="status" value="1" />
+        </div>
+      </div>
+
+      <div class="layui-form-item">
+        <label class="layui-form-label ">备注</label>
+        <div class="layui-input-block">
+          <textarea  type="text" name="desc"  autocomplete="off" class="layui-input"></textarea>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="bottom">
+    <div class="button-container">
+      <button type="submit" class="pear-btn pear-btn-primary pear-btn-md" lay-submit=""
+              lay-filter="save">
+        提交
+      </button>
+      <button type="reset" class="pear-btn pear-btn-md">
+        重置
+      </button>
+    </div>
+  </div>
+</form>
+
+<script src="/app/admin/component/layui/layui.js"></script>
+<script src="/app/admin/component/pear/pear.js"></script>
+<script src="/app/admin/admin/js/permission.js"></script>
+<script>
+
+  // 接口
+  const INSERT_URL = "/app/lucSource/admin/slide/infoInsert";
+  function GetRequest() {
+    var url = location.search; //获取url中"?"符后的字串
+    var theRequest = new Object();
+    if (url.indexOf("?") != -1) {
+      var str = url.substr(1);
+      strs = str.split("&");
+      for(var i = 0; i < strs.length; i ++) {
+        theRequest[strs[i].split("=")[0]] = unescape(strs[i].split("=")[1]);
+      }
+    }
+    return theRequest;
+  }
+  let request = new Object();
+  request = GetRequest();
+  const slide_id=request.slide_id
+
+
+  // 字段 禁用 status
+  layui.use(["form"], function() {
+    layui.$("#status").attr("checked", layui.$('input[name="status"]').val() != 0);
+    layui.form.render();
+    layui.form.on("switch(status)", function(data) {
+      layui.$('input[name="status"]').val(this.checked ? 1 : -1);
+    });
+  })
+  // 字段 头像 avatar
+  layui.use(["upload", "layer"], function() {
+    let input = layui.$("#avatar").prev();
+    input.prev().attr("src", input.val());
+    layui.$("#attachment-choose-avatar").on("click", function() {
+      parent.layer.open({
+        type: 2,
+        title: "选择附件",
+        content: "/app/admin/upload/attachment?ext=jpg,jpeg,png,gif,bmp",
+        area: ["95%", "90%"],
+        success: function (layero, index) {
+          parent.layui.$("#layui-layer" + index).data("callback", function (data) {
+            input.val(data.url).prev().attr("src", data.url);
+          });
+        }
+      });
+    });
+    layui.upload.render({
+      elem: "#avatar",
+      url: "/app/admin/upload/avatar",
+      acceptMime: "image/gif,image/jpeg,image/jpg,image/png",
+      field: "__file__",
+      done: function (res) {
+        if (res.code > 0) return layui.layer.msg(res.msg);
+        this.item.prev().val(res.data.url).prev().attr("src", res.data.url);
+      }
+    });
+  });
+
+
+  // 表单提交事件
+  layui.use(["form", "popup"], function () {
+    layui.form.on("submit(save)", function (data) {
+
+      if(data.field.status ==0){
+        data.field.status=-1
+      }
+       data.field.slide_id =slide_id
+      layui.$.ajax({
+        url: INSERT_URL,
+        type: "POST",
+        dateType: "json",
+        data: data.field,
+        success: function (res) {
+          if (res.code) {
+            return layui.popup.failure(res.msg);
+          }
+          return layui.popup.success("操作成功", function () {
+            parent.refreshTable();
+            parent.layer.close(parent.layer.getFrameIndex(window.name));
+          });
+        }
+      });
+      return false;
+    });
+  });
+
+</script>
+
+</body>
+</html>

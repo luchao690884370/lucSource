@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>浏览页面</title>
+  <link rel="stylesheet" href="/app/admin/component/pear/css/pear.css" />
+  <link rel="stylesheet" href="/app/admin/admin/css/reset.css" />
+</head>
+<body class="pear-container">
+
+
+<div class="layui-card">
+  <div class="layui-card-body">
+
+    <div class="layui-tab layui-tab-brief">
+      <ul class="layui-tab-title">
+        <li permission="app.lucSource.admin.setting.save"  class="layui-this">网站设置</li>
+      </ul>
+      <div class="layui-tab-content">
+        <!-- 网站测试 -->
+        <div class="layui-tab-item layui-show">
+
+          <form class="layui-form" onsubmit="return false" lay-filter="setting" style="width: 520px">
+            <div class="layui-form-item">
+              <label class="layui-form-label required">网站名称：</label>
+              <div class="layui-input-block">
+                <input type="text" name="web_name" required lay-verify="required" autocomplete="off" class="layui-input">
+              </div>
+            </div>
+            <div class="layui-form-item">
+              <label class="layui-form-label required">网站域名：</label>
+              <div class="layui-input-block">
+                <input type="text" name="host_name" required lay-verify="required" autocomplete="off" class="layui-input">
+              </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label required">网站Logo：</label>
+              <div class="layui-input-block">
+                <img class="img-3" src=""/>
+                <input type="text" style="display:none" name="logo_image" value="/app/admin/admin/avatar.png" />
+                <button type="button" class="pear-btn pear-btn-primary pear-btn-sm" id="image" permission="app.admin.upload.avatar">
+                  <i class="layui-icon layui-icon-upload"></i>上传图片
+                </button>
+                <button type="button" class="pear-btn pear-btn-primary pear-btn-sm" id="attachment-choose-image" permission="app.admin.upload.attachment">
+                  <i class="layui-icon layui-icon-align-left"></i>选择图片
+                </button>
+              </div>
+            </div>
+            <div class="layui-form-item">
+              <label class="layui-form-label required">icp备案号：</label>
+              <div class="layui-input-block">
+                <input type="text" name="icp" required lay-verify="required" autocomplete="off" class="layui-input">
+              </div>
+            </div>
+            <div class="layui-form-item">
+              <label class="layui-form-label required">公安备案号：</label>
+              <div class="layui-input-block">
+                <input type="text" name="beian" required lay-verify="required" autocomplete="off" class="layui-input">
+              </div>
+            </div>
+            <div class="layui-form-item">
+              <label class="layui-form-label required">SEO关键词：</label>
+              <div class="layui-input-block">
+                <textarea  type="text" name="seo_keywords" required lay-verify="required" autocomplete="off" class="layui-input"></textarea>
+              </div>
+            </div>
+            <div class="layui-form-item">
+              <label class="layui-form-label required">SEO描述：</label>
+              <div class="layui-input-block">
+                <textarea  type="text" name="seo_desc" required lay-verify="required" autocomplete="off" class="layui-input"></textarea>
+              </div>
+            </div>
+            <div class="layui-form-item">
+              <label class="layui-form-label required">统计代码：</label>
+              <div class="layui-input-block">
+                <textarea  type="text" name="tongji_code" required lay-verify="required" autocomplete="off" class="layui-input"></textarea>
+              </div>
+            </div>
+            <div class="layui-form-item">
+              <label class="layui-form-label required">版权信息：</label>
+              <div class="layui-input-block">
+                <input type="text" name="copyright" required lay-verify="required" autocomplete="off" class="layui-input">
+              </div>
+            </div>
+
+
+ <div class="layui-form-item layui-form-text">
+    <label class="layui-form-label">公司介绍</label>
+    <div class="layui-input-block">
+      <textarea  type="text" name="company_profile" required lay-verify="required" autocomplete="off"   placeholder="请输入公司介绍" class="layui-textarea"></textarea>
+    </div>
+  </div>
+
+            <div class="layui-form-item">
+              <div class="layui-input-block">
+                <button type="submit" class="pear-btn pear-btn-primary pear-btn-md" lay-submit="" lay-filter="saveSetting">
+                  保存
+                </button>
+                <button type="reset" class="pear-btn pear-btn-md">
+                  重置
+                </button>
+              </div>
+            </div>
+          </form>
+
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+</div>
+
+
+<script src="/app/admin/component/layui/layui.js"></script>
+<script src="/app/admin/component/pear/pear.js"></script>
+<script src="/app/admin/admin/js/permission.js"></script>
+<script src="/app/admin/admin/js/common.js"></script>
+
+
+
+
+
+<!-- 邮件设置 邮件测试 -->
+<script>
+  layui.use(["form", "popup","upload"], function(){
+    let form = layui.form;
+    let $ = layui.jquery;
+
+    // image
+    let input = $("#image").prev();
+    console.log()
+    input.prev().attr("src", input.val());
+    layui.$("#attachment-choose-image").on("click", function() {
+      parent.layer.open({
+        type: 2,
+        title: "选择附件",
+        content: "/app/admin/upload/attachment?ext=jpg,jpeg,png,gif,bmp",
+        area: ["95%", "90%"],
+        success: function (layero, index) {
+          parent.layui.$("#layui-layer" + index).data("callback", function (data) {
+            input.val(data.url).prev().attr("src", data.url);
+          });
+        }
+      });
+    });
+    layui.upload.render({
+      elem: "#image",
+      url: "/app/admin/upload/avatar",
+      acceptMime: "image/gif,image/jpeg,image/jpg,image/png",
+      done: function (res) {
+        if (res.code) {
+          return layui.popup.failure(res.msg);
+        }
+        this.item.prev().val(res.data.url).prev().attr("src", res.data.url);
+      }
+    });
+    $.ajax({
+      url: "/app/lucSource/admin/setting/get",
+      success: function (res) {
+        if (res.code) {
+          return layui.popup.failure(res.msg);
+        }
+        form.val("setting", res.data);
+        $("#image").prev().val(res.data.logo_image).prev().attr("src", res.data.logo_image);
+        $("#image").prev().val(res.data.logo_image).prev().attr("src", res.data.logo_image);
+      }
+    });
+
+    // 保存设置
+    form.on("submit(saveSetting)", function(data){
+      $.ajax({
+        url: "/app/lucSource/admin/setting/save",
+        dataType: "json",
+        type: "POST",
+        data: data.field,
+        success: function (res) {
+          if (res.code) {
+            return layui.popup.failure(res.msg);
+          }
+          form.val("test", data.field);
+          return layui.popup.success("操作成功");
+        }
+      });
+      return false;
+    });
+  });
+</script>
+
+<style>
+
+  .layui-input-block {
+    margin-left: 150px;
+  }
+
+  .layui-form-label {
+    width:120px;
+  }
+
+</style>
+</body>
+</html>
+

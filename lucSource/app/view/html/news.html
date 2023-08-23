@@ -1,0 +1,53 @@
+
+{include file="public/base" /}
+{include file="public/head" /}
+
+
+<div class="news_list1">
+    <div class="com_content">
+         
+        <div class="com">
+
+  
+
+        <div class="news_list_top">
+                <div class="t">
+                        <div class="l">
+                            <i>&#xe68f;</i>
+                            <cite>分类</cite>
+                        </div>
+                        <div class="r">
+                            <div  {eq name="cate_id" value=""}class='on'{/eq}><a href="/news"><span>全部</span></a></div>
+                            {foreach $CmsArticleCate as $key=>$vo} 
+                                <div  {eq name="vo.id.''" value="$cate_id.''"}class='on'{/eq}><a href="/news?cate_id={$vo.id}"><span>{$vo.title}</span></a></div>
+                            {/foreach} 
+                        </div>
+                </div>
+            </div>
+
+                <div class="c">
+                    {foreach $news.data as $k=>$v } 
+                                <div class="div_news_heng">
+                                    <div>
+                                            <a href="/news/info?id={$v.id}">
+                                                  <div class="div"><span>{$v.title}</span></div>
+                                                  <div class="div">
+                                                        <div><i>&#xe612;</i><em>{$v.read}</em></div>
+                                                        <div><i>&#xe940;</i><em>{$v.created_at|date='Y-m-d'}</em></div>
+                                                  </div>
+                                            </a>
+                                    </div>
+                                </div>
+                    {/foreach}
+                </div>
+
+                 <div class="newpage" data-aos="fade-up" aos-easing="ease-in-quad" data-aos-delay="200" aos-duration="300">
+                      <?= $paginator;?>               
+		         </div>
+        </div>
+
+    </div>
+</div>
+
+
+{include file="public/footer" /}

@@ -1,0 +1,75 @@
+   
+    <div class="head_top">
+        <div class="com_content">
+
+            <div class="div_right_div">
+                  <div class="div_right">
+                  <div class="div">
+                       <div><i>&#xe783;</i><span>网站地图</span></div>
+                  </div>
+                  <div class="div">
+                       <div><i>&#xe76f;</i><span>联系我们</span></div>
+                  </div>
+           {if isset($user)}
+                    <div class="div ">
+                            <div><a href="/user/info"><span>当前登录账号：</span><cite>{$user['username']}</cite></a></div>
+                    </div>
+                    <div class="div register">
+                           <div><a href="/login/logout"><span>退出</span></a></div>
+                    </div>
+               {else/}
+                        <div class="div login">
+                               <div><a href="/login"><span>登录</span></a></div>
+                        </div>
+                        <div class="div register">
+                            <div><a href="/register"><span>注册账号</span></a></div>
+                        </div>
+                 {/if}
+         
+             </div>
+            </div>
+           
+        </div>
+    </div>
+
+ <div class="head">
+         <div class="com_content">
+              <div class="logo">
+                  <img src="{$logo_image}"/>
+              </div>
+                <div class="navs">
+
+
+                     <div class="div">
+                          <a href="/"><span>首页</span></a>
+                     </div>
+                     <div class="div sub">
+                          <a href="/source"><span>源码</span> <i class="div_i">&#xe649;</i></a>
+                         <div class="sub_menu">
+                                {foreach $SourceCate as $key=>$vo} 
+                                  <div><a href="/source?cate_id={$vo.id}"><span>{$vo.title}</span></a></div>
+                                {/foreach}  
+                         </div>
+                     </div>
+      
+
+                    
+
+                     <div class="div sub">
+                          <a href="/news"><span>教程</span> <i class="div_i">&#xe649;</i></a>
+                         <div class="sub_menu">
+                                {foreach $CmsArticleCate as $key=>$vo} 
+                                   <div><a href="/news?cate_id={$vo.id}"><span>{$vo.title}</span></a></div>
+                                {/foreach}  
+                         </div>
+                     </div>
+
+ 
+
+                     <div class="div">
+                          <a href="javascript:;"><span>关于我们</span></a>
+                     </div>
+
+                </div>
+         </div>
+    </div>

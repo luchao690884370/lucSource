@@ -1,0 +1,74 @@
+
+
+    <div class="footer">
+        <div class="com_content">
+            <div class="com">
+
+                 <div class="c">
+                        <div class="am-g">
+                            <div class="am-u-sm-12 am-u-md-4 am-u-lg-2">
+                                 <div class="logo">
+                                     <img src="{$logo_image}"/>
+                                 </div>
+                            </div>
+                            <div class="am-u-sm-12 am-u-md-4 am-u-lg-10">
+                                 <div class="menu">
+
+
+                                        <div class="am-g">
+                                            <div class="am-u-sm-4 am-u-md-4 am-u-lg-2"> 
+                                                <div class="div">
+                                                    <p><a href=""><span>关于我们</span></a></p>
+                                                    <p><a href=""><em>关于我们</em></a></p>
+                                                    <p><a href=""><em>成为VIP</em></a></p>
+                                                    <p><a href=""><em>免责申明</em></a></p>
+                                                </div>
+                                            </div>
+
+                                             <div class="am-u-sm-4 am-u-md-4 am-u-lg-2">
+                                                <div class="div">
+                                                <p><span>教程</span></p>
+                                                {foreach $CmsArticleCate as $key=>$vo} 
+                                                <p><a href="/news?cate_id={$vo.id}"><em>{$vo.title}</em></a></p>
+                                                {/foreach} 
+                                                </div>
+                                              </div>
+
+                                                 <div class="am-u-sm-4 am-u-md-4 am-u-lg-2 am-u-end"> 
+                                                    <div class="div">
+                                                    <p><span>源码</span></p>
+                                                    {foreach $SourceCate as $key=>$vo} 
+                                                    <p><a href="/source?cate_id={$vo.id}" ><em>{$vo.title}</em></a></p>
+                                                    {/foreach} 
+                                                    </div>
+                                              </div>
+                                        </div>
+                
+                       
+                                  
+                                     </div>
+                                </div>
+                       
+                       
+
+                        </div> 
+                 </div>
+
+                <div class="c1">
+                    <div class="div">
+                           <em>友情链接：</em>
+                                  {foreach $links as $key=>$vo } 
+                                      <a href="{$vo.src}" target="_blank">{$vo.name}</a>
+                                {/foreach}  
+                    </div>
+                    <div class="div"><span>{$copyright}</span></div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+
+  </body>
+</html>

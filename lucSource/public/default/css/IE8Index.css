@@ -1,0 +1,87 @@
+﻿
+.fullSlide > cite span { filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#7f000000,endColorstr=#7f000000); }
+.fullSlide .bd li span {  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#7f000000,endColorstr=#7f000000); }
+.fullSlide > cite { z-index:999;top:120px;}
+.fullSlide > cite:first-child+cite{ right: 0; }
+
+/*队列排名*/
+.duiliepaiming_div .div:first-child em { background-color: #f54545; }
+.duiliepaiming_div .div:first-child +div em { background-color: #ff8547; }
+.duiliepaiming_div .div:first-child +div +div em{ background-color: #ffac38; }
+
+.head .main i.left {  top: 58px; }
+.head .main i.right { top: 58px; }
+
+.hongtou_top .div1 p span + span { text-align:right;}
+
+
+.Div2 > div:first-child { padding-right: 6px; }
+.Div2 > div:first-child+div+div { padding-left: 6px; }
+
+.Div2 > div:first-child + div + div +div{ padding-right: 6px; }
+.Div2 > div:first-child + div + div + div + div { padding-left: 6px; }
+.Div2 > div:first-child + div + div + div + div + div { padding-right: 6px; }
+.Div2 > div:first-child + div + div + div + div + div + div { padding-left: 6px; }
+.Div2 > div:first-child + div + div + div + div + div + div + div { padding-right: 6px; }
+.Div2 > div:first-child + div + div + div + div + div + div + div + div { padding-left: 6px; }
+.Div2 > div:first-child + div + div + div + div + div + div + div + div + div { padding-right: 6px; }
+.Div2 > div:first-child + div + div + div + div + div + div + div + div + div + div { padding-left: 6px; }
+
+
+.Div3 > div:first-child { padding-right: 6px; }
+.Div3 > div:first-child + div { padding-right: 6px; padding-left: 6px; }
+.Div3 > div:first-child + div +div{ padding-left: 6px; }
+.Div3 > div:first-child + div + div +div{ padding-right: 6px; }
+.Div3 > div:first-child + div + div + div + div { padding-right: 6px; padding-left: 6px; }
+.Div3 > div:first-child + div + div + div + div + div  { padding-left: 6px; }
+
+
+.fullSlide { height: 310px; }
+.fullSlide .bd li { height: 310px; }
+.fuchuang span i:first-child+em{ margin-top: 10px; }
+.footer_padding { padding: 0 25px; }
+
+/*.ct { background-image: url(../images/right_bj1.jpg);  }
+.body { background: url(../images/body1.png);}
+
+.fn_b { border-right: 2px dashed #f7cac9; }
+.Div4 > div:first-child + div + div .fn_b { border: 0; }
+.Div3 > div:first-child + div + div .fn_b { border: 0; }*/
+.col-lg1 { width: 8.33333333% }
+.col-lg2 { width: 16.66666667% }
+.col-lg3 { width: 25% }
+.col-lg4 { width: 33.33333333% }
+.col-lg45 { width: 37.5% }
+.col-lg5 { width: 41.66666667% }
+.col-lg6 { width: 50% }
+.col-lg7 { width: 58.33333333% }
+.col-lg8 { width: 66.66666667% }
+.col-lg9 { width: 75% }
+.col-lg10 { width: 83.33333333% }
+.col-lg11 { width: 91.66666667% }
+.col-lg12 { width: 100% }
+
+.pl-lg-1 { padding-left: 5px; }
+.pl-lg-2 { padding-left: 10px; }
+.pl-lg-3 { padding-left: 15px; }
+.pl-lg-4 { padding-left: 20px; }
+.pl-lg-5 { padding-left: 25px; }
+.pl-lg-6 { padding-left: 30px }
+.pl-lg-7 { padding-left: 35px; }
+.pl-lg-8 { padding-left: 40px }
+.pr-lg-1 { padding-right: 5px; }
+.pr-lg-2 { padding-right: 10px; }
+.pr-lg-3 { padding-right: 15px; }
+.pr-lg-4 { padding-right: 20px; }
+.pr-lg-5 { padding-right: 25px; }
+.pr-lg-6 { padding-right: 30px }
+.pr-lg-7 { padding-right: 35px; }
+.pr-lg-8 { padding-right: 40px; }
+
+
+
+
+
+
+
+
